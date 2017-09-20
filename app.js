@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import request from 'request';
+import styles from './app.css';
+import swal from 'sweetalert';
 
 let mazetable = [];
 
@@ -60,15 +62,15 @@ class Player extends React.Component{
             newx = oldx - 1;
             newy = oldy;
 
-            document.getElementById('item_' + newx + newy).innerHTML = "p";
-            document.getElementById('item_' + oldx + oldy).innerHTML = " ";
+            document.getElementById('row_' + newx + 'col_' + newy).innerHTML = "p";
+            document.getElementById('row_' + oldx + 'col_' + oldy).innerHTML = " ";
             oldx = newx;
             oldy = newy;
 
             changes++;
             this.setState({change: changes});
-            if(mJson[oldx][oldy + 1] == "g"){
-                alert('ganaste');
+            if(mJson[newx][newy + 1] == "g"){
+                swal("Bien hecho", "Ganaste!", "success");
             }
         }
         else if ((move == 'down' && mJson[oldx + 1][oldy] == " ") || (move == 'down' && mJson[oldx + 1][oldy] == "g")) {
@@ -76,32 +78,32 @@ class Player extends React.Component{
             newx = oldx + 1;
             newy = oldy;
 
-            document.getElementById('item_' + newx + newy).innerHTML = "p";
-            document.getElementById('item_' + oldx + oldy).innerHTML = " ";
+            document.getElementById('row_' + newx + 'col_' + newy).innerHTML = "p";
+            document.getElementById('row_' + oldx + 'col_' + oldy).innerHTML = " ";
 
             oldx = newx;
             oldy = newy;
 
             changes++;
             this.setState({change: changes});
-            if(mJson[oldx][oldy + 1] == "g"){
-                alert('ganaste');
+            if(mJson[newx][newy + 1] == "g"){
+                swal("Bien hecho", "Ganaste!", "success");
             }
         }
         else if ((move == 'left' && mJson[oldx][oldy - 1] == " ") || (move == 'left' && mJson[oldx][oldy - 1] == "g")) {
             newx = oldx;
             newy = oldy - 1;
 
-            document.getElementById('item_' + newx + newy).innerHTML = "p";
-            document.getElementById('item_' + oldx + oldy).innerHTML = " ";
+            document.getElementById('row_' + newx + 'col_' + newy).innerHTML = "p";
+            document.getElementById('row_' + oldx + 'col_' + oldy).innerHTML = " ";
 
             oldx = newx;
             oldy = newy;
 
             changes++;
             this.setState({change: changes});
-            if(mJson[oldx][oldy + 1] == "g"){
-                alert('ganaste');
+            if(mJson[newx][newy + 1] == "g"){
+                swal("Bien hecho", "Ganaste!", "success");
             }
         }
         else if ((move == 'right' && mJson[oldx][oldy + 1] == " ") || (move == 'right' && mJson[oldx][oldy + 1] == "g")) {
@@ -109,16 +111,16 @@ class Player extends React.Component{
             newx = oldx;
             newy = oldy + 1;
 
-            document.getElementById('item_' + newx + newy).innerHTML = "p";
-            document.getElementById('item_' + oldx + oldy).innerHTML = " ";
+            document.getElementById('row_' + newx + 'col_' + newy).innerHTML = "p";
+            document.getElementById('row_' + oldx + 'col_' + oldy).innerHTML = " ";
 
             oldx = newx;
             oldy = newy;
 
             changes++;
             this.setState({change: changes});
-            if(mJson[oldx][oldy + 1] == "g"){
-                alert('ganaste');
+            if(mJson[newx][newy + 1] == "g"){
+                swal("Bien hecho", "Ganaste!", "success");
             }
         }
         else if(move == null) {
@@ -129,7 +131,7 @@ class Player extends React.Component{
                 for (let j = 0; j < mJson[i].length; j++) {
 
                     mazeRow.push(
-                        <td key={'item_' + i + j} id={'item_' + i + j}>
+                        <td key={'row_' + i + 'col_' + j} id={'row_' + i + 'col_' + j}>
                             {mJson[i][j]}
                         </td>
                     );
